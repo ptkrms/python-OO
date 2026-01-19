@@ -1,8 +1,21 @@
+from datetime import datetime
+
 class Extrato:
     def __init__(self):
-        self.transacoes = [] #lista das transações da conta
+        self.transacoes = []
 
-    def extrato(self, numeroConta):
-        print(f"Extrato: {numeroConta}\n")
-        for transacao in self.transacoes:
-            print(f"{transacao[0]:15s} {transacao[1]:10.2f} {transacao[2]:10s} {transacao[3].strftime('%d/%m/%Y')}")
+    def registrar(self, tipo, valor):
+        self.transacoes.append({
+            "tipo": tipo,
+            "valor": valor,
+            "data": datetime.now()
+        })
+
+    def imprimir(self):
+        print("\n=== EXTRATO ===")
+        for t in self.transacoes:
+            print(
+                f"{t['tipo']:30} "
+                f"R$ {t['valor']:8.2f} "
+                f"{t['data'].strftime('%d/%m/%Y %H:%M')}"
+            )
